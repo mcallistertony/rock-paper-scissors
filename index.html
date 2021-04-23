@@ -1,1 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title class="font-white">Rock Paper Scissors</title>
+        <link href="styles/reset.css" rel="stylesheet">
+        <link href="styles/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <h1><span class="light-font font-white">Rock</span> <span class="regular-font font-white">Paper</span> <span class="bold-font font-white">Sissors</span></h1>
+        </header>
+        <main>
+            <section id="score-panel" class="score-panel">
+                <div class="score-panel-section">
+                    <h2 class="font-score">User Score</h2>
+                    <div>
+                        <span class="font-navy" id="userScorePannel">0</span>
+                    </div>
+                </div>
+                <div class="score-panel-section">
+                    <h2 id="round" class="font-white">Round</h2>
+                    <div>
+                        <span class="font-navy" id="roundPannel">1/5</span>
+                    </div>
+                </div>
+                <div class="score-panel-section">
+                    <h2 class="font-score">Computer Score</h2>
+                    <div>
+                        <span class="font-navy" id="computerScorePannel">0</span>
+                    </div>
+                </div>
+            </section>
+            <section id="message-box" >
+                <p class="font-navy message-box-message">Welcome! Pick an item to start a new game.</p>
+            </section>
+            <section id="items-selector-container" class="items-selector-container">
+                <div id="rock-selector" class="item-selector">
+                    <img src="images/rock-icon.svg" alt="rock-icon">
+                    <span class="selector-name font-navy">rock</span>
+                </div>
+                <div id="paper-selector" class="item-selector">
+                    <img src="images/paper-icon.svg" alt="rock-icon">
+                    <span class="selector-name font-navy">paper</span>
+                </div>
+                <div id="scissors-selector" class="item-selector">
+                    <img src="images/scissors-icon.svg" alt="rock-icon">
+                    <span class="selector-name font-navy">scissors</span>
+                </div>
+            </section>
+            <button class="submit-button">submit</button>
+            <div id="decoration-div"></div>
+
+            <section class="end-game-message hidden">
+                <p class="font-navy end-message">
+                    random text in the meetime
+                </p>
+                <button id="replay-button">REPLAY</button>
+            </section>
+        </main>
+    </body>
+</html>
 <script src="scripts/main.js"></script>

@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
+
+html {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    background-color: #eaeef0;
+}
+
+img {
+    display: block;
+    max-width: 100px;
+    filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.1));
+}
+
+/*styling fonts*/
+.light-font {
+    font-weight: 100;
+}
+
+.regular-font {
+    font-weight: 400;
+}
+
+.bold-font {
+    font-weight: 700;
+}
+
+.font-score {
+    color: #6fe9ea;
+}
+
+.font-navy {
+    color: #255b78;
+}
+
+.font-white {
+    color: white;
+}
+
+/*styling the header*/
+h1 {
+    margin: 80px auto 40px auto;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 46px;
+    position: relative;
+}
+
+/*styling the score panel*/
+/*score panel container*/
+.score-panel {
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+    align-items: flex-end;
+    max-width: 70vw;
+}
+
+/*score panel individual sections*/
+.score-panel-section {
+    text-align: center;
+}
+
+.score-panel-section span {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.score-panel-section h2 {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.score-panel-section #round {
+    font-size: 24px;
+}
+
+.score-panel-section div {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 5px;
+    width: 150px;
+    margin: 10px;
+}
+
+/*styling the message box*/
+#message-box {
+    margin: 18vh auto 0px auto;
+    text-align: center;
+    background-color: white;
+    max-width: 70vw;
+    height: 45px;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 35px;
+    }
+
+#message-box p {
+    text-transform: uppercase;
+}
+
+/*styling the items selector*/
+.items-selector-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 50vw;
+    margin: 60px auto 0px auto;
+    align-items: flex-end;
+}
+
+.item-selector {
+    background-color: white;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 10px 10px 10px;
+    margin: 0px 20px 0px 20px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px #e3e7e8;
+    transition-duration: 500ms;
+}
+
+.item-selector:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.selector-name {
+    text-transform: uppercase;
+}
+
+.selected {
+    transform: scale(1.1);
+    background-color: #67e8e3;
+    box-shadow: 2px 2px 10px #145b7a;
+}
+
+/*styling the submit button*/
+button {
+    margin: 60px auto 0px auto;
+    text-align: center;
+    display: block;
+    padding: 10px 40px 10px 40px;
+    border-radius: 25px;
+    border-style: none;
+    background-color: rosybrown;
+    color: white;
+    text-transform: uppercase;
+    background-image: linear-gradient(-25deg, #145b7a, #67e8e3);
+    transition-duration: 500ms;
+}
+
+button:hover {
+    transform:scale(1.1);
+    cursor: pointer;
+}
+
+/*styling the decoration div for background*/
+#decoration-div {
+    background-image: linear-gradient(-25deg, #145b7a, #67e8e3);
+    width: 100vw;
+    min-height: 400px;
+    border-radius: 80px;
+    position: absolute;
+    top: -75px;
+    z-index: -1;
+
+}
+
+/*styling the end of the game div*/
+.end-game-message {
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 10px 10px 100px grey;
+    width: 250px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+}
+
+.end-game-message p {
+    text-transform: uppercase;
+    margin: 50px 50px 0px 50px;
+    text-align: center;
+    width: 250px;
+}
+
+.end-game-message button {
+    margin-bottom: 50px;
+}
+
+/*hidden class for the end of game message*/
+.hidden {
+    position: fixed;
+    top: -10000px;
+}

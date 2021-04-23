@@ -1,115 +1,166 @@
-//Function that pick a random choice from either rock, paper or scissors for the computer's choice
+function toggleSelection(element) {
+    //check to see if another item was selected
+    if (document.querySelectorAll('.selected').length !== 0) {
+        document.querySelector('.selected').classList.toggle('selected'); //if there was another one, deselect it
+    }
+    element.classList.toggle('selected'); //toggle the clicked element
+
+    switch (element.id) {
+        case 'scissors-selector':
+            userSelection = 'scissors';
+            break;
+        case 'paper-selector':
+            userSelection = 'paper';
+            break;
+        case 'rock-selector':
+            userSelection = 'rock';
+            break;
+    }
+}
+
 function computerPlay() {
     const choices = ['rock', 'paper', 'scissors']; // define choices 
     const randomNum = Math.floor(Math.random() * choices.length);//Pick a random number corresponding to list length
-    const finalChoice = choices[randomNum]; //pick the item in the list that has index position selected in previous step
-    return(finalChoice); //return the final choice
+    computerSelection = choices[randomNum]; //pick the item in the list that has index position selected in previous step
 }
 
-//Single Round of playing
-function playRound(playerSelection, computerSelection) {
-    //turn the playerSelection in lowerCase
-    playerSelection = playerSelection.toLowerCase();
-
-    //define messages to display when winning, losing, or tie
-    const winMessage = `You win! ${playerSelection} beats ${computerSelection}.`;
-    const loseMessage = `You lose! ${computerSelection} beats ${playerSelection}.`;
-    const tieMessage = `It's a tie! You both choosed ${playerSelection}`;
-
-    //declare the displayMessage we will use to return the result of the game
-    let displayMessage;
-
-    //Playing scenarios
-    if (playerSelection === 'rock') {
+function checkWinner(){
+    console.log(userSelection);
+    let winner;
+    if (userSelection === 'rock') {
         switch(computerSelection) {
             case ('rock'):
-                displayMessage = tieMessage;
+                winner = 'tie';
                 break;
             case ('paper'):
-                displayMessage = loseMessage;
+                winner = 'computer';
                 break;
             case ('scissors'):
-                displayMessage = winMessage;
+                winner = 'user';
                 break;
         }
-    } else if (playerSelection === 'scissors') {
+    } else if (userSelection === 'scissors') {
         switch(computerSelection) {
             case ('rock'):
-                displayMessage = loseMessage;
+                winner = 'computer';
                 break;
             case ('paper'):
-                displayMessage = winMessage;
+                winner = 'user';
                 break;
             case ('scissors'):
-                displayMessage = tieMessage;
+                winner = 'tie';
                 break;
         }
-    } else if (playerSelection === 'paper') {
+    } else if (userSelection === 'paper') {
         switch(computerSelection) {
             case ('rock'):
-                displayMessage = winMessage;
+                winner = 'user';
                 break;
             case ('paper'):
-                displayMessage = tieMessage;
+                winner = 'tie';
                 break;
             case ('scissors'):
-                displayMessage = loseMessage;
+                winner = 'computer';
                 break;
         }
     }
-    //return game output message
-    return displayMessage;
+    return winner;
 }
 
-//function for 5 rounds of playing
-function game() {
-    //initialize score
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 1; i <= 5; i++) {
-        //Print round number to the console
-        console.log(`Round ${i} of 5!`);
-
-        //ask the player his choice to play and store it in a variable
-        const playerSelection = prompt('please choose between "rock", "paper" or "scissors"');
-
-        //get the computer to pick between rock paper or scissors
-        const computerSelection = computerPlay();
-        
-        //call the playRound function to play the round
-        let roundOutput = playRound(playerSelection, computerSelection);
-
-        //check if player won by checking if there is win in the roundOutput
-        if (!(roundOutput.indexOf('win') === -1)) {
+function updateParam(winner) {
+    const winMessage = `You win! ${userSelection} beats ${computerSelection}.`;
+    const loseMessage = `You lose! ${computerSelection} beats ${userSelection}.`;
+    const tieMessage = `It's a tie! You both choosed ${userSelection}`;
+    switch(winner) {
+        case 'tie':
+            messageBox.textContent = tieMessage;
+            break;
+        case 'user':
+            messageBox.textContent = winMessage;
             playerScore += 1;
-            console.log(roundOutput);
-            console.log(`Player score: ${playerScore}, Computer score: ${computerScore}`);
-        }
-        //check if player lost by checking if there is lose in the roundOutput
-        else if (!(roundOutput.indexOf('lose') === -1)) {
+            userScorePanel.textContent = playerScore;
+            break;
+        case 'computer':
+            messageBox.textContent = loseMessage;
             computerScore += 1;
-            console.log(roundOutput);
-            console.log(`Player score: ${playerScore}, Computer score: ${computerScore}`);
-        }
-        //check if it's a tie by checking if there is tie in the roundOutput string
-        else if (!(roundOutput.indexOf('tie') === -1)) {
-            console.log(roundOutput);
-            console.log(`Player score: ${playerScore}, Computer score: ${computerScore}`);
-        }
+            computerScorePannel.textContent = computerScore;
+            break;
     }
-    //check who has the highest score to declare the winner
-    if (playerScore < computerScore) {
-        console.log('You lost the game')
-    } else if (playerScore > computerScore) {
-        console.log('You won the game')
-    } else if (playerScore === computerScore) {
-        console.log('The game is a tie.')
+    round += 1;
+    (round < 6) ?
+    roundPannel.textContent = `${round}/5` :
+    roundPannel.textContent = `5/5`;
+    document.querySelector('.selected').classList.toggle('selected');
+
+}
+
+function displayFinalMessage() {
+    let endMessage = document.querySelector('.end-message');
+    if (playerScore === computerScore) {
+        endMessage.textContent = `game over, its a tie!`;
+    } else if (playerScore < computerScore) {
+        endMessage.textContent = 'game over, you lose!';
+    } else if (computerScore < playerScore) {
+        endMessage.textContent = 'game over, you win!';
     }
 }
 
-game();
+function resetGame () {
+    //reset all game data
+    round = 1;
+    roundPannel.textContent = `${round}/5`;
+    playerScore = 0;
+    userScorePanel.textContent = `${playerScore}`;
+    computerScore = 0;
+    computerScorePannel.textContent = `${computerScore}`;
+    userSelection = '';
+    computerSelection = '';
 
+    //replace the button
+    button.classList.toggle('hidden');
 
+    //rehide the end of game message
+    endGameMessage.classList.toggle('hidden');
 
+    
+}
+function startGame() {
+    if (userSelection !== '') { //check the user made a selection
+        computerPlay();  //pick for the computer
+        let winner = checkWinner(); //check who won
+        updateParam(winner); //update score board, message, and round
+        if (round === 6) { //if final round
+            displayFinalMessage();
+            endGameMessage.classList.toggle('hidden');
+            button.classList.toggle('hidden');
+        }
+    }
+}
 
+//set up global DOM variables
+const userScorePanel = document.querySelector('#userScorePannel');
+const roundPannel = document.querySelector('#roundPannel');
+const computerScorePannel = document.querySelector('#computerScorePannel');
+const messageBox = document.querySelector('.message-box-message');
+const button = document.querySelector('button');
+const selectors = document.querySelectorAll('.item-selector');
+const endGameMessage = document.querySelector('.end-game-message');
+const endGameButton = document.querySelector('#replay-button');
 
+// set up the global playing variables
+let round = 1;
+let playerScore = 0;
+let computerScore = 0;
+let userSelection = '';
+let computerSelection = '';
+
+//Add event listeners on all the three item selectors
+selectors.forEach(element => element.addEventListener('click', () => {
+    toggleSelection(element);
+}));
+
+//Add an event listener on the submit button
+button.addEventListener('click', startGame)
+
+//Add an event listener on the end of game replay button
+endGameButton.addEventListener('click', resetGame);
